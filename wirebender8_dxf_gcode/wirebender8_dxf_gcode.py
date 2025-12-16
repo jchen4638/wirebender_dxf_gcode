@@ -7,8 +7,8 @@ import matplotlib.pyplot as plt
 
 # ---------- CONFIG ----------
 input_dxf = "RV.dxf"
-output_file = "C:\\Users\\jchen\\OneDrive\\wirebender8_dxf_gcode\\wirebender8_dxf_gcode\\Gcode\\wire_bender_output.gcode"
-output_final = "C:\\Users\\jchen\\OneDrive\\wirebender8_dxf_gcode\\wirebender8_dxf_gcode\\Gcode\\wire_marlin.gcode"
+output_file = "Gcode\\wire_bender_output.gcode"
+output_final = "Gcode\\wire_marlin.gcode"
 
 #IGNORE (DOESN'T AFFECT CODE CONVERSION FOR MARLIN)
 feed_rate = 100          # mm/min feed
