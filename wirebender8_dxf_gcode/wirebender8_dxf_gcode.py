@@ -10,11 +10,11 @@ input_dxf = "RV.dxf"
 output_file = "Gcode\\wire_bender_output.gcode"
 output_final = "Gcode\\wire_marlin.gcode"
 
-#IGNORE (DOESN'T AFFECT CODE CONVERSION FOR MARLIN)
+#IGNORE (DOESN'T AFFECT CODE CONVERSION FOR KLIPPER)
 feed_rate = 100          # mm/min feed
 rotation_speed = 30      # deg/sec bending
 
-#DOES AFFECT CODE CONVERSION FOR MARLIN
+#DOES AFFECT CODE CONVERSION FOR KLIPPER
 curve_resolution_mm = 9  #how large each segment is extruded before a bend, smaller=smoother
 spring_back = -2         #degree (offset for springback)
 feedrate_bend = 1600     #feedrate for the X-axis motor (1600/60)mm/s
@@ -311,11 +311,11 @@ plt.show()
 
 
 # ============================================
-# Convert DXF-generated wire bender G-code to Marlin G-code
+# Convert DXF-generated wire bender G-code to KLIPPER G-code
 # ============================================
 
 
-# ---------- BEND FORMULAS FOR MARLIN ----------
+# ---------- BEND FORMULAS FOR KLIPPER ----------
 def marlin_cw_formula(angle_deg):
     """CW bends (angle < 0)"""
     x = angle_deg + spring_back
@@ -328,7 +328,7 @@ def marlin_ccw_formula(angle_deg):
             - 0.0003346*x**3 + 0.01534*x**2
             - 0.1524*x + 42.63)
 
-# ---------- MARLIN CONVERSION FUNCTION ----------
+# ---------- KLIPPER CONVERSION FUNCTION ----------
 def convert_to_marlin_gcode(input_file_prev, output_final=None,
                              feed_axis="E", bend="X", pin_axis="Z", feed_bend=feedrate_bend, feed_pin=feedrate_pin):
    
@@ -361,8 +361,8 @@ def convert_to_marlin_gcode(input_file_prev, output_final=None,
 
 
     with open(output_final, "w") as f_out:
-        # HOMING for Marlin
-        f_out.write("; Converted for Marlin 3D printer\n")
+        # HOMING for KLIPPER
+        f_out.write("; Converted for KLIPPER 3D printer\n")
         f_out.write("G28 Z ; home axes\n")
         f_out.write("G28 X Y ; home axes\n")
         f_out.write("G90\n")
@@ -438,7 +438,7 @@ def convert_to_marlin_gcode(input_file_prev, output_final=None,
         f_out.write("M18\n")
         f_out.write("M84\n")
 
-    print(f"Marlin-compatible G-code saved as:\n{output_final}")
+    print(f"KLIPPER-compatible G-code saved as:\n{output_final}")
 
     
 convert_to_marlin_gcode(output_file, output_final)
